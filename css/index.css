@@ -1,0 +1,11 @@
+input.placeholder {
+    text-align: center;
+}
+.url {
+    top:413px;
+    right:290px;
+    width: 355px;
+    height: 25px;
+    font-size: 17;
+    text-align: center;
+}
