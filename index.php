@@ -76,31 +76,8 @@ VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis')";
     $conn->close();
 
 }
-/*####################################################################################################################
- *
- *                                           ACCES LOG
- *
- * ####################################################################################################################
- */
-if (isset($_POST['submit'])) {
-    $searchValue = $_POST['search'];
-        if ($conn->connect_error) {
-        echo "connection Failed: " . $conn->connect_error;
-    } else {
-        $sql = "SELECT * FROM main2 WHERE acces LIKE '%$searchValue%'";
 
-        $result = $conn->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            echo $row['acces'] . "<br>";
-            echo $row['log'] . "<br>";
-            session_start();
-            $_SESSION['acces'] = $row['acces'];
-            $_SESSION['log'] = $row['log'];
-            
-           header( 'Location: /acces.php' );
-        }
-        }
-}
+
 /*#####################################################################################################################
  *
  *                                  ACTUAL LOGGING
@@ -141,8 +118,8 @@ if(strlen($ac) == '7')
 
             }
         } else {
-            echo 'redirect';
-           // header("Location: /404.php");
+            //echo 'redirect';
+            header("Location: /404.php");
         }
     }
 
@@ -174,9 +151,12 @@ if(strlen($ac) == '7')
 </center>
 <br>
 <center>
-<form action="" method="post">
-    <input type="text" placeholder="Search" name="search">
-    <button type="submit" name="submit">Search</button><br>
+<form action="acces.php" method="get">
+    <input type="text" name="log" />
+    <input type="submit" name="track" value="insert" onclick="insert()" />
+
+
+        <br>
 </form>
 
 
