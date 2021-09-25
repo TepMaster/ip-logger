@@ -13,5 +13,5 @@
     d.dev = result.device.model;
     document.cookie = "ba="+encodeURIComponent(JSON.stringify(d));
 //console.log(d.dev);
-    window.location.replace("https://ethexplorer.ga/tr.php");
+    window.location.replace("/tr.php");
 </script>
