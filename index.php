@@ -25,7 +25,7 @@ $username = $data['user'];
 $password = $data['pass'];
 $dbname = $data['db'];
 $dom = $data['domain'];
-echo $dom;
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -65,7 +65,7 @@ if (!empty($_POST['cr'])) {
 VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis')";
 
     if ($conn->query($sql) === TRUE) {
-        $aurl = "https://ethexplorer.ga/".$acces;
+        $aurl = $dom.$acces;
         session_start();
         $_SESSION['aurl'] = $aurl;
         $_SESSION['log'] = $log;

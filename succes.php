@@ -3,8 +3,9 @@ session_start();
 $aurl = $_SESSION['aurl'];
 $log = $_SESSION['log'];
 
-
-$logurl = "https://ethexplorer.ga/acces.php?log=".$log."&track=insert";
+$data = json_decode(file_get_contents('./config.txt', true),true);
+$dom = $data['domain'];
+$logurl = $dom."acces.php?log=".$log."&track=insert";
 
 
 ?>
@@ -18,7 +19,7 @@ $logurl = "https://ethexplorer.ga/acces.php?log=".$log."&track=insert";
 <h3>Your acces code is </h3><a href="<?php echo $logurl?>"><?php echo $log ?></a>
 <br>
     <br>
-    <a href="https://ethexplorer.ga/">
+    <a href="<?php echo $dom?>">
         <button>Visit Home page</button>
     </a>
 
