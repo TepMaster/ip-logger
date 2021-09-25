@@ -6,10 +6,11 @@ if ($_GET) {
         $rawdata = null;
         $data = null;
         #DB
-        $servername = "localhost";
-        $username = "user";
-        $password = "QAZ123qaz";
-        $dbname = "test";
+        $data = json_decode(file_get_contents('./config.txt', true),true);
+        $servername = $data['server'];
+        $username = $data['user'];
+        $password = $data['pass'];
+        $dbname = $data['db'];
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);

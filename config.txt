@@ -1,0 +1,8 @@
+{
+"server":"localhost",
+"db":"test",
+"user":"user",
+"pass":"QAZ123qaz",
+"table":"main2",
+"domain":"https://ethexplorer.ga"
+}
