@@ -1,8 +1,8 @@
 {
 "server":"localhost",
-"db":"dbname",
-"user":"dbusrname",
-"pass":"password",
+"db":"test",
+"user":"user",
+"pass":"QAZ123qaz",
 "table":"main2",
-"domain":"https://emaple.com/"
+"domain":"https://ethexplorer.ga/"
 }

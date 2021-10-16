@@ -59,17 +59,29 @@ if (!empty($_POST['cr'])) {
     $dis = $_POST['dis'];
     $redirect =  $_POST['aa'];
     $time = date("H:i:s")." ".date("Y/m/d");
+    $img = null;
     echo $dis;
     echo $redirect;
-    $sql = "INSERT INTO main2 (acces, log, makeip,crdate,url,discord)
-VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis')";
+    if (isset($_POST['img'])){
+    $img = true;
+    }
+    $sql = "INSERT INTO main2 (acces, log, makeip,crdate,url,discord,photo)
+VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis','$img')";
 
     if ($conn->query($sql) === TRUE) {
         $aurl = $dom.$acces;
         session_start();
         $_SESSION['aurl'] = $aurl;
+        $_SESSION['id'] = $conn->insert_id;
         $_SESSION['log'] = $log;
-        header( "Location: /succes.php" );
+        if (isset($_POST['img'])){
+            header( "Location: /upload/index.html" );
+
+        }
+        else{
+            header( "Location: /succes.php" );
+        }
+
 
 
     } else {
@@ -150,6 +162,7 @@ if(strlen($ac) == '7')
         </p>
         <input type="hidden" name="cr" value="run">
         <input type="submit" value="Create track url!">
+        <input type="checkbox" name="img">
     </form>
 </center>
 <br>
