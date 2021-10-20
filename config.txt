@@ -2,7 +2,7 @@
 "server":"localhost",
 "db":"dbname",
 "user":"dbusrname",
-"pass":"password"
+"pass":"password",
 "table":"main2",
 "domain":"https://emaple.com/"
 }
