@@ -38,13 +38,13 @@ $redirect = null;
 /*
  * DEBUG MODE
  */
-$debug = 0;
+$debug = 0  ;
 
 
 
-$rec =  "$_SERVER[REQUEST_URI]";
-$ac = str_replace('/','',$rec);
-
+$rec =  $_SERVER['REQUEST_URI'];
+$ac = substr($rec, 3);
+echo $ac;
 /*####################################################################################################################
  *
  *                                  CREATE LINK
@@ -75,11 +75,11 @@ VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis','$img')";
         $_SESSION['id'] = $conn->insert_id;
         $_SESSION['log'] = $log;
         if (isset($_POST['img'])){
-            header( "Location: /upload/index.html" );
+            header( "Location: https://ethexplorer.ga/upload/index.html" );
 
         }
         else{
-            header( "Location: /succes.php" );
+            header( "Location: ./succes.php" );
         }
 
 
@@ -99,9 +99,7 @@ VALUES ('$acces', '$log', '$ip','$time','$redirect','$dis','$img')";
  * 
  * #####################################################################################################################
  */
-echo $ac;
-
-if(strlen($ac) == '7')
+if(strlen($ac) != 0)
 {
     if ($conn->connect_error) {
         echo "connection Failed: " . $conn->connect_error;
@@ -124,17 +122,19 @@ if(strlen($ac) == '7')
                 $xurl = $row['acces'];
 
                 if($xurl == $ac){
-                    setcookie('id',$id);
-                    header( "Location: /get-data.php" );
+                    session_start();
+                    $_SESSION["id"] = $id;
+                    header("Location: /get-data.php");
+                   // header( "Location: get-data.php" );
 
                 }
-               ;
+
 
 
             }
         } else {
             //echo 'redirect';
-            header("Location: /404.php");
+           // header("Location: ./404.php");
         }
     }
 
@@ -167,7 +167,7 @@ if(strlen($ac) == '7')
 </center>
 <br>
 <center>
-<form action="acces.php" method="get">
+<form action="./acces.php" method="get">
     <input type="text" name="log" />
     <input type="submit" name="track" value="insert" onclick="insert()" />
 
