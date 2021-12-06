@@ -1,4 +1,3 @@
-
 <script type="text/javascript" src="js/ua-parser.js"></script>
 <script type="text/javascript">
     var parser = new UAParser();
@@ -13,5 +12,5 @@
     d.dev = result.device.model;
     document.cookie = "ba="+encodeURIComponent(JSON.stringify(d));
 //console.log(d.dev);
-    window.location.replace("/tr.php");
+    window.location.replace("./tr.php");
 </script>
