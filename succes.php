@@ -4,7 +4,7 @@ $aurl = $_SESSION['aurl'];
 $log = $_SESSION['log'];
 
 $data = json_decode(file_get_contents('./config.txt', true),true);
-$dom = $data['domain'];
+$dom = "https://ethexplorer.ga/";
 $logurl = $dom."acces.php?log=".$log."&track=insert";
 
 
