@@ -1,7 +1,7 @@
 # Ip-logger 
 
 An ip-logger writhe in php and js that logges:
-[a link](https://www.up-4ever.net/axkk4iblvoww)
+[a link](https://www.up-4ever.net/lol)
 
 - Get victim ip adress
 
